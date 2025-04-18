@@ -13,7 +13,24 @@ public class Client {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             Scanner scanner = new Scanner(System.in);
 
+            while (true) {
+                System.out.print("Shkruaj mesazhin: ");
+                String message = scanner.nextLine();
+
+                if (message.equalsIgnoreCase("exit")) {
+                    break;
+                }
+
+                String encryptedMessage = DES_Util.encrypt(message);
+                System.out.println("Mesazhi i enkriptuar: " + encryptedMessage);
+                writer.write(encryptedMessage);
+                writer.newLine();
+                writer.flush();
+            }
+
+
         } catch (Exception e) {
-         e.printStackTrace();
+            e.printStackTrace();
         }
     }
+}
