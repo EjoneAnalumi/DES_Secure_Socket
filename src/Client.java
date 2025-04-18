@@ -27,8 +27,7 @@ public class Client {
                 writer.newLine();
                 writer.flush();
             }
-
-
+            socket.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
