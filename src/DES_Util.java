@@ -11,7 +11,7 @@ public class DES_Util {
         return new SecretKeySpec(SECRET_KEY.getBytes(), ALGORITHM);
     }
 
-    public static String encrypt(String plainText) {
+    public static String encrypt(String plainText) throws Exception {
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, getKey());
         byte[] encrypted = cipher.doFinal(plainText.getBytes());
