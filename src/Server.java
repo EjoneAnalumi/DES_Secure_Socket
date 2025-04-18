@@ -8,7 +8,7 @@ import java.util.Base64;
 
 public class Server {
     public static void main(String[] args) {
-        int port = 33698;
+        int port = 4000;
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.println("Serveri eshte duke pritur ne portin " + port + "...");
