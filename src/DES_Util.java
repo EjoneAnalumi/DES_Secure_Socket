@@ -17,4 +17,11 @@ public class DES_Util {
         byte[] encrypted = cipher.doFinal(plainText.getBytes());
         return Base64.getEncoder().encodeToString(encrypted);
     }
+    public static String decrypt(String cipherText) throws Exception {
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, getKey());
+        byte[] decoded = Base64.getDecoder().decode(cipherText);
+        byte[] decrypted = cipher.doFinal(decoded);
+        return new String(decrypted);
+    }
 }
