@@ -1,19 +1,14 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Client {
-    private static final String SERVER_IP = "127.0.0.1";
-    private static final int SERVER_PORT = 5001;
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try (Socket socket = new Socket(SERVER_IP, SERVER_PORT)) {
-            System.out.print("Shkruaj një mesazh për të dërguar në server: ");
-            String message = scanner.nextLine();
+        String serverIP = "127.0.0.1";
+        int port = 5000;
 
-        } catch (IOException e) {
-            System.out.println("Gabim gjatë lidhjes me serverin: " + e.getMessage());
+        try (Socket socket = new Socket(serverIP, port)) {
+            System.out.println("I lidhur me serverin në " + serverIP + ":" + port);
+        } catch (Exception e) {
+         e.printStackTrace();
         }
     }
-}
