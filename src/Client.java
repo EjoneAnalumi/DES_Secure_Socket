@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         String serverIP = "127.0.0.1";
-        int port = 5000;
+        int port = 33698;
 
         try (Socket socket = new Socket(serverIP, port)) {
             System.out.println("I lidhur me serverin në " + serverIP + ":" + port);
