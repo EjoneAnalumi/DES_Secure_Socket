@@ -7,9 +7,6 @@ import java.net.Socket;
 import java.util.Base64;
 
 public class Server {
-    private static final String SECRET_KEY = "12345678";
-    private static final String ALGORITHM = "DES";
-
     public static void main(String[] args) {
         int port = 5000;
 
@@ -21,20 +18,13 @@ public class Server {
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-
-            SecretKey key = new SecretKeySpec(SECRET_KEY.getBytes(), ALGORITHM);
-            Cipher cipher = Cipher.getInstance(ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE, key);
-
-            String encryptedLine;
-            while ((encryptedLine = reader.readLine()) != null) {
-                System.out.println("Mesazhi i enkriptuar (Base64): " + encryptedLine);
+            String cipherText;
+            while ((cipherText = reader.readLine()) != null) {
+                System.out.println("Mesazhi i enkriptuar: " + cipherText);
+                System.out.println("-------------------------------------------------");
 
                 // dekriptimi
-                byte[] decodedBytes = Base64.getDecoder().decode(encryptedLine);
-                byte[] decryptedBytes = cipher.doFinal(decodedBytes);
-                String decryptedMessage = new String(decryptedBytes);
-
+                String decryptedMessage = DES_Util.decrypt(cipherText);
                 System.out.println("Mesazhi i dekriptuar: " + decryptedMessage);
                 System.out.println("-------------------------------------------------");
             }
