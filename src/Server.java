@@ -29,7 +29,18 @@ public class Server {
                 System.out.println("-------------------------------------------------");
 
                 if (decryptedMessage.equalsIgnoreCase("exit")) {
-                    System.out.println(">> Klienti ka dërguar komandën 'exit' dhe po mbyll lidhjen.");
+                    System.out.println("Klienti ka kërkuar mbylljen e lidhjes.");
+
+                    // Dërgoni konfirmim përpara se të mbyllni
+                    try {
+                        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+                        writer.write(DES_Util.encrypt("exit-confirm"));
+                        writer.newLine();
+                        writer.flush();
+                    } catch (Exception e) {
+                        System.err.println("Gabim në dërgimin e konfirmimit: " + e.getMessage());
+                    }
+
                     break;
                 }
             }
