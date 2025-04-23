@@ -18,7 +18,21 @@ public class Client {
                 String message = scanner.nextLine();
 
                 if (message.equalsIgnoreCase("exit")) {
-                    socket.close();
+                    // Dërgo "exit" si zakonisht
+                    String encryptedMessage = DES_Util.encrypt(message);
+                    System.out.println("Mesazhi i enkriptuar: " + encryptedMessage);
+                    writer.write(encryptedMessage);
+                    writer.newLine();
+                    writer.flush();
+
+                    // Prit përgjigjen e serverit
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    String response = reader.readLine();
+                    if (response != null) {
+                        String decryptedResponse = DES_Util.decrypt(response);
+                        System.out.println("Përgjigja e serverit: " + decryptedResponse);
+                    }
+
                     break;
                 }
 
