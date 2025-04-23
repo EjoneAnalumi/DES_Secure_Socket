@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         String serverIP = "serveo.net";
-        int port = 33698;
+        int port = 38415;
 
         try (Socket socket = new Socket(serverIP, port)) {
             System.out.println("I lidhur me serverin në " + serverIP + ":" + port);
@@ -18,6 +18,7 @@ public class Client {
                 String message = scanner.nextLine();
 
                 if (message.equalsIgnoreCase("exit")) {
+                    socket.close();
                     break;
                 }
 
