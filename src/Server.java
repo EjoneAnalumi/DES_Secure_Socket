@@ -27,6 +27,11 @@ public class Server {
                 String decryptedMessage = DES_Util.decrypt(cipherText);
                 System.out.println("Mesazhi i dekriptuar: " + decryptedMessage);
                 System.out.println("-------------------------------------------------");
+
+                if (decryptedMessage.equalsIgnoreCase("exit")) {
+                    System.out.println(">> Klienti ka dërguar komandën 'exit' dhe po mbyll lidhjen.");
+                    break;
+                }
             }
 
             socket.close();
